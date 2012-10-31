@@ -186,7 +186,7 @@ class Config(object):
         self.values = Config.config_values.copy()
         config = {}
         if dirname is not None:
-            config_file = path.join(dirname, filename)
+            config_file = path.join(dirname.encode(sys.getfilesystemencoding()), filename)
             config['__file__'] = config_file
             config['tags'] = tags
             olddir = os.getcwd()

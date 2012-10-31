@@ -461,7 +461,7 @@ class BuildEnvironment:
         elif base is None:
             return docname + suffix
         else:
-            return path.join(base, docname) + suffix
+            return path.join(base, docname.encode(sys.getfilesystemencoding())) + suffix
 
     def relfn2path(self, filename, docname=None):
         """Return paths to a file referenced from a document, relative to
@@ -1321,7 +1321,7 @@ class BuildEnvironment:
         def _entries_from_toctree(toctreenode, parents,
                                   separate=False, subtree=False):
             """Return TOC entries for a toctree node."""
-            refs = [(e[0], str(e[1])) for e in toctreenode['entries']]
+            refs = [(e[0], e[1]) for e in toctreenode['entries']]
             entries = []
             for (title, ref) in refs:
                 try:

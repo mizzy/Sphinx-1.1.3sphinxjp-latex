@@ -11,6 +11,7 @@
 
 import os
 from os import path
+import sys
 
 from docutils import nodes
 from docutils.io import FileOutput
@@ -88,7 +89,7 @@ class LaTeXBuilder(Builder):
             if len(entry) > 5:
                 toctree_only = entry[5]
             destination = FileOutput(
-                destination_path=path.join(self.outdir, targetname),
+                destination_path=path.join(self.outdir.encode(sys.getfilesystemencoding()), targetname),
                 encoding='utf-8')
             self.info("processing " + targetname + "... ", nonl=1)
             doctree = self.assemble_doctree(docname, toctree_only,

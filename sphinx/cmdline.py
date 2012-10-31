@@ -65,7 +65,7 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv[1:], 'ab:t:d:c:CD:A:ng:NEqQWw:P')
         allopts = set(opt[0] for opt in opts)
-        srcdir = confdir = path.abspath(args[0])
+        srcdir = confdir = unicode(path.abspath(args[0]), sys.getfilesystemencoding())
         if not path.isdir(srcdir):
             print >>sys.stderr, 'Error: Cannot find source directory.'
             return 1
@@ -74,7 +74,7 @@ def main(argv):
             print >>sys.stderr, ('Error: Source directory doesn\'t '
                                  'contain conf.py file.')
             return 1
-        outdir = path.abspath(args[1])
+        outdir = unicode(path.abspath(args[1]), sys.getfilesystemencoding())
         if not path.isdir(outdir):
             print >>sys.stderr, 'Making output directory...'
             os.makedirs(outdir)

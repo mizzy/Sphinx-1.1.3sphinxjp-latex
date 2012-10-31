@@ -10,6 +10,7 @@
 """
 
 import re
+import sys
 
 from docutils import nodes
 
@@ -141,7 +142,7 @@ def inline_all_toctrees(builder, docnameset, docname, tree, colorfunc):
     tree = tree.deepcopy()
     for toctreenode in tree.traverse(addnodes.toctree):
         newnodes = []
-        includefiles = map(str, toctreenode['includefiles'])
+        includefiles = toctreenode['includefiles']
         for includefile in includefiles:
             try:
                 builder.info(colorfunc(includefile) + " ", nonl=1)
